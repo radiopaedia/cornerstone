@@ -2,7 +2,8 @@
   "name": "cornerstone-core",
   "version": "0.0.0-semantically-released",
   "description": "HTML5 Medical Image Viewer Component",
-  "main": "./dist/cornerstone.js",
+  "browser": "./dist/cornerstone.js",
+  "main": "./dist/esbuild-node.js",
   "keywords": [
     "DICOM",
     "medical",
@@ -39,6 +40,7 @@
     "test:chrome": "karma start config/karma/karma-chrome.js",
     "test:firefox": "karma start config/karma/karma-firefox.js",
     "watch": "npm run webpack:watch",
+    "esbuild:node": "esbuild --define:onlydecode=true --define:window=global --define:document=global --platform=node --bundle --loader:.wasm=binary --tree-shaking=true src/node.js  > dist/esbuild-node.js",
     "webpack": "npm run clean:dist && npm run webpack:prod && npm run webpack:dev",
     "webpack:dev": "webpack --progress --config ./config/webpack/webpack-dev",
     "webpack:prod": "webpack --progress --config ./config/webpack/webpack-prod",
@@ -93,5 +95,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "esbuild": "^0.14.30"
   }
 }
